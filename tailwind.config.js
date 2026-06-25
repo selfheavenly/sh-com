@@ -1,23 +1,40 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-    "./src/components/**/*.{js,ts,jsx,tsx}",
-    "./src/components/ui/**/*.{js,ts,jsx,tsx}", // Include shadcn/ui components
-  ],
+  content: ["./index.html", "./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        cormorant: ['"Cormorant Garamond"', "Georgia", "serif"],
+      },
       colors: {
-        primary: "#60a5fa", // blue-400
-        secondary: "#4338ca", // indigo-700
-        background: "#0f172a", // slate-950
-        "background-secondary": "#1e293b", // slate-900
-        accent: "#67e8f9", // cyan-300
-        text: "#f1f5f9", // slate-100
-        "text-secondary": "#cbd5e1", // slate-300
+        sand: {
+          DEFAULT: "#DDD5C5",
+          light: "#EAE4D8",
+          dark: "#C9BDA8",
+        },
+        ruby: {
+          DEFAULT: "#8B2020",
+          dark: "#6e1a1a",
+          light: "#B53030",
+        },
+        ink: {
+          DEFAULT: "#2C2420",
+          60: "#2C242099",
+        },
+      },
+      keyframes: {
+        shake: {
+          "0%, 100%": { transform: "translateX(0)" },
+          "20%": { transform: "translateX(-8px)" },
+          "40%": { transform: "translateX(8px)" },
+          "60%": { transform: "translateX(-6px)" },
+          "80%": { transform: "translateX(6px)" },
+        },
+      },
+      animation: {
+        shake: "shake 0.4s ease",
       },
     },
   },
-  plugins: [], // No animation plugins
+  plugins: [],
 };

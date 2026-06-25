@@ -1,0 +1,567 @@
+/*
+  styles.css
+  ──────────
+  Only styles specific to the Date Designer mini-apps live here.
+  The main selfheavenly.com site styles are NOT imported — isolation is intentional.
+
+  We use Tailwind as utility-first for the admin shell, with local `.may-*` and
+  `.admin-*` classes for the bespoke Date Designer surfaces.
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Imperial+Script&family=Inter:wght@300;400;500;600;700&display=swap");
+@import "tailwindcss";
+
+@config "../tailwind.config.js";
+
+html,
+body,
+#root {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  min-width: 320px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.home-page {
+  min-height: 100svh;
+  margin: 0;
+  background: #ffffff;
+  color: #050505;
+  font-family: "Inter", Helvetica, Arial, sans-serif;
+}
+
+.home-message {
+  padding: min(35svh, 304px) 24px 48px;
+}
+
+.home-message p {
+  margin: 0 0 16px;
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.home-message h1 {
+  margin: 0;
+  font-size: clamp(56px, 16vw, 68px);
+  font-weight: 300;
+  line-height: 1.12;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.may-screen {
+  --may-bg: #ddd3bd;
+  --may-ink: #302c25;
+  --may-muted: rgb(48 44 37 / 0.68);
+  --may-ruby: #971d25;
+  min-height: 100svh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: var(--may-bg);
+  color: var(--may-ink);
+  font-family: "Inter", Helvetica, Arial, sans-serif;
+}
+
+.may-stage {
+  position: relative;
+  width: min(100%, 393px);
+  min-height: 100svh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: var(--may-bg);
+}
+
+.may-stage-unlocked {
+  background: radial-gradient(circle at center, #e0d3b8 0%, #e0d3b8 38%, #cec0a1 100%);
+}
+
+.may-script {
+  font-family: "Imperial Script", "Cormorant Garamond", Georgia, serif;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.may-serif {
+  font-family: "Cormorant Garamond", Georgia, serif;
+}
+
+.may-progress {
+  width: 240px;
+  max-width: calc(100% - 128px);
+  height: 8px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgb(236 226 204 / 0.72);
+}
+
+.may-progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--may-ruby);
+  transition: width 0.45s ease;
+}
+
+.may-progress-position {
+  margin: 122px auto 0;
+}
+
+.may-action-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  color: var(--may-ruby);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.42em;
+  line-height: 1.25;
+  text-transform: uppercase;
+  transition: color 0.16s ease, opacity 0.16s ease, transform 0.16s ease;
+}
+
+.may-action-link:active {
+  transform: translateY(1px);
+}
+
+.may-action-link:disabled {
+  color: rgb(151 29 37 / 0.26);
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+.may-lock-content {
+  padding: 255px 56px 0;
+  text-align: center;
+}
+
+.may-lock-title {
+  margin: 0 0 7px;
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.may-lock-subtitle {
+  margin: 0 0 24px;
+  color: var(--may-muted);
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.25;
+}
+
+.may-pin-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.may-pin-box {
+  appearance: none;
+  height: 96px;
+  border: 1px solid rgb(255 255 255 / 0.52);
+  border-radius: 14px;
+  background: rgb(224 211 184 / 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(151 29 37 / 0.75);
+  font-size: 22px;
+  font-weight: 300;
+  transition: background 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease;
+}
+
+.may-pin-grid-active .may-pin-box {
+  border-color: rgb(255 255 255 / 0.72);
+}
+
+.may-pin-box-active {
+  border-color: rgb(151 29 37 / 0.74);
+  background: rgb(151 29 37 / 0.055);
+  box-shadow: 0 0 0 3px rgb(151 29 37 / 0.08), 0 14px 30px rgb(151 29 37 / 0.12);
+}
+
+.may-hidden-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.maybox-content {
+  padding-top: 218px;
+  text-align: center;
+}
+
+.maybox-title {
+  margin: 0;
+  font-size: 58px;
+  line-height: 0.95;
+}
+
+.maybox-copy {
+  margin: 23px 0 0;
+  color: var(--may-muted);
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.25;
+}
+
+.may-empty-content {
+  padding: 270px 42px 0;
+  text-align: center;
+}
+
+.may-empty-title {
+  margin: 0;
+  font-size: 58px;
+  line-height: 0.95;
+}
+
+.may-empty-copy {
+  margin: 24px auto 0;
+  max-width: 260px;
+  color: var(--may-muted);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.25;
+}
+
+.maybox-button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  margin-top: 126px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  color: inherit;
+  cursor: pointer;
+}
+
+.maybox-button .may-action-link {
+  pointer-events: none;
+}
+
+.may-envelope-wrap {
+  position: relative;
+  width: 162px;
+  height: 98px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.may-envelope-wrap::before {
+  position: absolute;
+  inset: -120px -92px -150px;
+  content: "";
+  background:
+    radial-gradient(circle at 50% 48%, rgb(151 29 37 / 0.26) 0%, rgb(151 29 37 / 0.12) 24%, transparent 58%),
+    radial-gradient(circle at 50% 70%, rgb(185 74 50 / 0.2) 0%, transparent 52%);
+  pointer-events: none;
+}
+
+.may-envelope {
+  position: relative;
+  width: 205px;
+  max-width: none;
+}
+
+.may-envelope-heart {
+  position: absolute;
+  width: 76px;
+  max-width: none;
+}
+
+.may-letter-copy {
+  padding: 0 42px 220px;
+  text-align: center;
+}
+
+.may-letter-title {
+  margin: 88px 0 24px;
+  font-size: 58px;
+  line-height: 0.95;
+}
+
+.may-letter-stanzas {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.may-letter-stanzas p {
+  margin: 0;
+  color: rgb(48 44 37 / 0.78);
+  font-size: 19px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.24;
+  white-space: pre-line;
+}
+
+.may-letter-action {
+  position: absolute;
+  right: 17px;
+  bottom: 132px;
+}
+
+.may-step-heading {
+  margin-top: 95px;
+  padding: 0 16px;
+  text-align: center;
+}
+
+.may-step-heading h2 {
+  margin: 0;
+  color: var(--may-ink);
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.may-step-heading p {
+  margin: 7px 0 0;
+  color: rgb(48 44 37 / 0.74);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+.may-options-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 32px;
+  padding: 0 16px;
+}
+
+.may-option {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 11px;
+  color: rgb(48 44 37 / 0.68);
+  text-align: center;
+  transition: transform 0.16s ease, color 0.16s ease;
+}
+
+.may-option:active {
+  transform: scale(0.98);
+}
+
+.may-option-image {
+  width: 100%;
+  aspect-ratio: 115 / 160;
+  overflow: hidden;
+  border: 1.5px solid transparent;
+  border-radius: 6px;
+  background: rgb(255 255 255 / 0.2);
+  opacity: 0.58;
+  transition: border-color 0.16s ease, opacity 0.16s ease;
+}
+
+.may-option-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.may-option-selected {
+  color: var(--may-ruby);
+}
+
+.may-option-selected .may-option-image {
+  border-color: var(--may-ruby);
+  opacity: 1;
+}
+
+.may-option-label {
+  max-width: 100%;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.18;
+}
+
+.may-step-nav {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 132px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.may-step-nav .may-action-link {
+  max-width: 47%;
+}
+
+.may-step-nav button {
+  color: var(--may-ink);
+}
+
+.may-step-nav button:last-child {
+  color: var(--may-ruby);
+}
+
+.may-step-nav .may-action-link:disabled {
+  color: rgb(151 29 37 / 0.26);
+}
+
+.may-summary-content {
+  padding-top: 282px;
+  text-align: center;
+}
+
+.may-summary-title {
+  margin: 0;
+  font-size: 54px;
+  line-height: 0.95;
+}
+
+.may-summary-heart {
+  width: 132px;
+  max-width: none;
+  margin: 37px auto 0;
+}
+
+.may-summary-pickup {
+  margin: 43px auto 0;
+  max-width: 260px;
+  color: rgb(48 44 37 / 0.74);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.22;
+}
+
+.may-summary-pickup strong {
+  color: var(--may-ink);
+  font-weight: 500;
+}
+
+.may-summary-action {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 134px;
+  width: fit-content;
+  margin: 0 auto;
+  text-align: center;
+}
+
+@media (max-width: 360px) {
+  .may-lock-content {
+    padding-left: 34px;
+    padding-right: 34px;
+  }
+
+  .may-options-grid {
+    padding-left: 12px;
+    padding-right: 12px;
+    gap: 7px;
+  }
+
+  .may-option-label {
+    font-size: 15px;
+  }
+}
+
+@layer components {
+  .input {
+    width: 100%;
+    border-radius: 0.5rem;
+    border: 1px solid #e5e7eb;
+    background: #f9fafb;
+    padding: 0.5rem 0.75rem;
+    color: #1f2937;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .input:focus {
+    border-color: #8b2020;
+    box-shadow: 0 0 0 2px rgb(139 32 32 / 0.3);
+    outline: none;
+  }
+
+  .admin-input {
+    width: 100%;
+    border-radius: 0.5rem;
+    border: 1px solid rgb(255 255 255 / 0.1);
+    background: rgb(9 9 11 / 0.7);
+    padding: 0.55rem 0.75rem;
+    color: rgb(244 244 245);
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease,
+      background-color 0.15s ease;
+  }
+
+  .admin-input::placeholder {
+    color: rgb(113 113 122);
+  }
+
+  .admin-input:focus {
+    border-color: rgb(255 255 255 / 0.28);
+    background: rgb(9 9 11 / 0.95);
+    box-shadow: 0 0 0 3px rgb(255 255 255 / 0.08);
+    outline: none;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.25s ease both;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-8px);
+  }
+  40% {
+    transform: translateX(8px);
+  }
+  60% {
+    transform: translateX(-6px);
+  }
+  80% {
+    transform: translateX(6px);
+  }
+}

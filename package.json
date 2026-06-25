@@ -1,33 +1,25 @@
 {
-  "name": "selfheavenly-site",
+  "name": "date-designer",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "description": "Self Heavenly frontend and private date designer.",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "bun tsc -b && bunx vite build",
+    "build": "bun tsc -b && bunx vite build && bun run prepare-pages",
     "lint": "eslint .",
+    "prepare-pages": "bun scripts/prepare-pages.mjs",
+    "require-api-url": "bun scripts/require-production-api-url.mjs",
     "preview": "vite preview",
-    "predeploy": "bun run build",
+    "predeploy": "bun run require-api-url && bun run build",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
-    "@radix-ui/react-separator": "^1.1.7",
-    "@radix-ui/react-slot": "^1.2.3",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "framer-motion": "^12.23.15",
-    "lucide-react": "^0.544.0",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1",
-    "react-hook-form": "^7.62.0",
-    "react-icons": "^5.5.0",
-    "tailwind-merge": "^3.3.1",
-    "tailwindcss-animate": "^1.0.7"
+    "react-dom": "^19.1.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.35.0",
-    "@tailwindcss/cli": "^4.1.13",
     "@tailwindcss/vite": "^4.1.13",
     "@types/node": "^24.5.2",
     "@types/react": "^19.1.13",

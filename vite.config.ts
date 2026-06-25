@@ -1,18 +1,17 @@
 import { defineConfig } from "vite";
-import path from "path";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  base: "/selfheavenly/",
+  base: "/",
   plugins: [react(), tailwindcss()],
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-      "@/components": path.resolve(__dirname, "./src/components"),
-      "@/components/ui": path.resolve(__dirname, "./src/components/ui"),
-      "@/lib": path.resolve(__dirname, "./src/lib"),
-      "@/hooks": path.resolve(__dirname, "./src/hooks"),
+  server: {
+    proxy: {
+      "/api": "http://127.0.0.1:7072",
     },
+  },
+  build: {
+    outDir: "dist",
+    emptyOutDir: true,
   },
 });
