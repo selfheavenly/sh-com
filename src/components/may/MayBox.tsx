@@ -18,9 +18,11 @@ export function MayBox({ onOpen }: MayBoxProps) {
             onClick={onOpen}
             className="maybox-button group active:scale-[0.98] transition-transform"
           >
-            <span className="may-envelope-wrap">
-              <img src={envelope} alt="" className="may-envelope" />
-              <img src={rubyHeart} alt="" className="may-envelope-heart" />
+            <span className="may-envelope-float">
+              <span className="may-envelope-wrap">
+                <img src={envelope} alt="" className="may-envelope" />
+                <img src={rubyHeart} alt="" className="may-envelope-heart" />
+              </span>
             </span>
             <span className="may-action-link">Click to unseal</span>
           </button>

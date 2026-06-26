@@ -68,15 +68,16 @@ body {
   background: var(--may-bg);
   color: var(--may-ink);
   font-family: "Inter", Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
 }
 
 .may-stage {
   position: relative;
-  width: min(100%, 393px);
+  width: 100%;
   min-height: 100svh;
   overflow-x: hidden;
-  overflow-y: auto;
   background: var(--may-bg);
+  animation: mayPageIn 0.28s cubic-bezier(0.2, 0.72, 0.22, 1) both;
 }
 
 .may-stage-unlocked {
@@ -142,6 +143,8 @@ body {
 .may-lock-content {
   padding: 255px 56px 0;
   text-align: center;
+  width: min(100%, 393px);
+  margin: 0 auto;
 }
 
 .may-lock-title {
@@ -203,6 +206,8 @@ body {
 .maybox-content {
   padding-top: 218px;
   text-align: center;
+  width: min(100%, 393px);
+  margin: 0 auto;
 }
 
 .maybox-title {
@@ -222,6 +227,8 @@ body {
 .may-empty-content {
   padding: 270px 42px 0;
   text-align: center;
+  width: min(100%, 393px);
+  margin: 0 auto;
 }
 
 .may-empty-title {
@@ -254,7 +261,15 @@ body {
 }
 
 .maybox-button .may-action-link {
+  margin-top: 8px;
   pointer-events: none;
+}
+
+.may-envelope-float {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: mayEnvelopeLevitate 3.8s ease-in-out infinite;
 }
 
 .may-envelope-wrap {
@@ -264,6 +279,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.28s cubic-bezier(0.2, 0.72, 0.22, 1);
+}
+
+.maybox-button:hover .may-envelope-wrap,
+.maybox-button:focus-visible .may-envelope-wrap {
+  transform: scale(1.055);
 }
 
 .may-envelope-wrap::before {
@@ -274,6 +295,8 @@ body {
     radial-gradient(circle at 50% 48%, rgb(151 29 37 / 0.26) 0%, rgb(151 29 37 / 0.12) 24%, transparent 58%),
     radial-gradient(circle at 50% 70%, rgb(185 74 50 / 0.2) 0%, transparent 52%);
   pointer-events: none;
+  transform-origin: 50% 56%;
+  animation: mayRubyGlowPulse 3.2s ease-in-out infinite;
 }
 
 .may-envelope {
@@ -291,6 +314,8 @@ body {
 .may-letter-copy {
   padding: 0 42px 220px;
   text-align: center;
+  width: min(100%, 393px);
+  margin: 0 auto;
 }
 
 .may-letter-title {
@@ -317,7 +342,7 @@ body {
 
 .may-letter-action {
   position: absolute;
-  right: 17px;
+  right: max(17px, calc(50% - 196px + 17px));
   bottom: 132px;
 }
 
@@ -325,6 +350,9 @@ body {
   margin-top: 95px;
   padding: 0 16px;
   text-align: center;
+  width: min(100%, 393px);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .may-step-heading h2 {
@@ -351,6 +379,9 @@ body {
   gap: 8px;
   margin-top: 32px;
   padding: 0 16px;
+  width: min(100%, 393px);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .may-option {
@@ -404,12 +435,13 @@ body {
 
 .may-step-nav {
   position: absolute;
-  left: 16px;
-  right: 16px;
+  left: 50%;
   bottom: 132px;
+  width: min(calc(100% - 32px), 361px);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  transform: translateX(-50%);
 }
 
 .may-step-nav .may-action-link {
@@ -429,8 +461,11 @@ body {
 }
 
 .may-summary-content {
-  padding-top: 282px;
+  min-height: 100svh;
+  padding: 282px 32px 96px;
   text-align: center;
+  width: min(100%, 393px);
+  margin: 0 auto;
 }
 
 .may-summary-title {
@@ -439,10 +474,31 @@ body {
   line-height: 0.95;
 }
 
+.may-summary-heart-wrap {
+  position: relative;
+  width: 132px;
+  margin: 37px auto 0;
+}
+
 .may-summary-heart {
   width: 132px;
   max-width: none;
-  margin: 37px auto 0;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.may-heart-spark {
+  position: absolute;
+  left: calc(50% - var(--spark-size) / 2);
+  top: calc(50% - var(--spark-size) / 2);
+  width: var(--spark-size);
+  max-width: none;
+  pointer-events: none;
+  opacity: 0;
+  animation: mayHeartSpark 2.35s ease-out infinite;
+  animation-delay: var(--spark-delay);
+  filter: drop-shadow(0 1px 4px rgb(151 29 37 / 0.18));
 }
 
 .may-summary-pickup {
@@ -459,11 +515,31 @@ body {
   font-weight: 500;
 }
 
+.may-summary-footer {
+  margin: clamp(112px, 19svh, 174px) auto 0;
+  max-width: 280px;
+}
+
+.may-summary-note {
+  margin: 0 auto;
+  color: rgb(48 44 37 / 0.58);
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.may-summary-or {
+  margin: 22px 0 20px;
+  color: rgb(48 44 37 / 0.62);
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-align: center;
+}
+
 .may-summary-action {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 134px;
   width: fit-content;
   margin: 0 auto;
   text-align: center;
@@ -483,6 +559,20 @@ body {
 
   .may-option-label {
     font-size: 15px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .may-stage,
+  .may-envelope-float,
+  .may-envelope-wrap::before,
+  .may-heart-spark {
+    animation: none;
+  }
+
+  .maybox-button:hover .may-envelope-wrap,
+  .maybox-button:focus-visible .may-envelope-wrap {
+    transform: none;
   }
 }
 
@@ -544,6 +634,54 @@ body {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes mayPageIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mayEnvelopeLevitate {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@keyframes mayRubyGlowPulse {
+  0%,
+  100% {
+    opacity: 0.78;
+    transform: scale(0.96);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes mayHeartSpark {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.44) rotate(-8deg);
+  }
+  14% {
+    opacity: 0.92;
+  }
+  74%,
+  100% {
+    opacity: 0;
+    transform: translate(var(--spark-x), var(--spark-y)) scale(1) rotate(10deg);
   }
 }
 
